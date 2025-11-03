@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import {
   FlatList,
   Image,
+  ImageSourcePropType,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,26 +10,61 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const notes = [
+const notes: Note[] = [
   {
     id: 1,
-    image: "@/assets/images/kodeinNotes.png",
+    image: require("@/assets/images/content1.png"),
     title: "Belajar Mobile App",
     description: "Belajar Membuat Aplikasi mobile app",
     date: "29 Oktober 2025",
   },
   {
     id: 2,
-    image: "@/assets/images/kodeinNotes.png",
+    image: require("@/assets/images/content2.png"),
     title: "Belajar backend",
     description: "Belajar membuat restful api",
     date: "30 Oktober 2025",
+  },
+  {
+    id: 3,
+    image: require("@/assets/images/content3.png"),
+    title: "Belajar Mobile App",
+    description: "Belajar Membuat Aplikasi mobile app",
+    date: "11 November 2025",
+  },
+  {
+    id: 4,
+    image: require("@/assets/images/content4.png"),
+    title: "Belajar backend",
+    description: "Belajar membuat restful api",
+    date: "17 November 2025",
+  },
+  {
+    id: 5,
+    image: require("@/assets/images/content4.png"),
+    title: "Belajar backend",
+    description: "Belajar membuat restful api",
+    date: "17 November 2025",
+  },
+  {
+    id: 6,
+    image: require("@/assets/images/content4.png"),
+    title: "Belajar backend",
+    description: "Belajar membuat restful api",
+    date: "17 November 2025",
+  },
+  {
+    id: 7,
+    image: require("@/assets/images/content4.png"),
+    title: "Belajar backend",
+    description: "Belajar membuat restful api",
+    date: "17 November 2025",
   },
 ];
 
 type Note = {
   id: number;
-  image: string;
+  image: ImageSourcePropType | { uri: string };
   title: string;
   description: string;
   date: string;
@@ -37,7 +73,7 @@ type Note = {
 const NoteItem = ({ item }: { item: Note }) => {
   return (
     <View style={styles.card}>
-      <Image source={require("@/assets/images/kodeinNotes.png")} style={{ width: 75, height: 75 }} />
+      <Image source={item.image} style={{ width: 75, height: 75 }} />
 
       <View style={styles.cardContainer}>
         <Text style={styles.cardTitle}>{item.title}</Text>
@@ -66,7 +102,8 @@ export default function HomeScreen() {
           data={notes}
           renderItem={({ item }) => <NoteItem item={item} />}
           keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{ gap: 10 }}
+          contentContainerStyle={{ gap: 10, flexGrow: 1 }}
+          ListEmptyComponent={() => <EmptyData/>}
         />
       </View>
 
@@ -75,6 +112,23 @@ export default function HomeScreen() {
       </TouchableOpacity>
     </SafeAreaView>
   );
+}
+
+const EmptyData = () => {
+  return (
+    <View style={styles.emptyContainer}>
+      <Image
+      style={{width: 160, height:160}}
+      source={require("@/assets/images/homePage.png")}
+      />
+
+      <Text style={styles.emptyTitle}>Add your first note</Text>
+      <Text style={styles.emptyDesc}>
+        Save your thoughts, tasks or inspiration
+      </Text>
+
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -146,5 +200,23 @@ const styles = StyleSheet.create({
   cardDate: {
     fontSize: 13,
     marginTop: 15,
+  },
+
+  emptyContainer:{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
+  },
+
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 10
+  },
+
+  emptyDesc: {
+    fontSize: 16,
+    color: "gray"
   },
 });

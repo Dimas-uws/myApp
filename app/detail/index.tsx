@@ -1,0 +1,138 @@
+import { Ionicons } from "@expo/vector-icons";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function DetailScreen() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.appBar}>
+        <Ionicons name="arrow-back" size={26} color={"#FF5B13"} />
+        <Text style={styles.appBarTitle}>Note Details</Text>
+      </View>
+      <ScrollView>
+        <View style={styles.image}>
+          <Image
+          source={require("@/assets/images/content1.png")}
+          style={{ width: 250, height: 250 }}
+        />
+        </View>
+
+        <View style={styles.content}>
+          <Text style={styles.title}>Belajar progaming</Text>
+          <Text style={styles.date}>Selasa 13 Mei 2025</Text>
+          <Text style={styles.desc}>
+            Mulailah dengan memahami dasar JavaScript seperti fungsi, array, dan
+            async/await. Pelajari konsep component di React dan gunakan
+            functional component serta hooks seperti useState dan useEffect.
+          </Text>
+          <Text style={styles.desc}>
+            Bangun proyek kecil seperti to-do list untuk latihan. Gunakan
+            dokumentasi resmi React dan manfaatkan React Developer Tools untuk
+            debugging. Terakhir, bergabunglah dengan komunitas agar semangat
+            belajar tetap terjaga.
+          </Text>
+        </View>
+      </ScrollView>
+
+      <View style={styles.bngksbtn}>
+        <TouchableOpacity style={styles.button1}>
+          <Text style={styles.text1}>Update</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button2}>
+          <Text style={styles.text2}>Delete</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  appBar: {
+    height: 56,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+    paddingHorizontal: 7,
+  },
+
+  appBarTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  content: {
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    gap: 6,
+  },
+
+  title: {
+    fontSize: 16,
+    fontWeight: 500,
+  },
+
+  date: {
+    fontSize: 12,
+    color: "gray",
+  },
+
+  desc: {
+    paddingVertical: 10,
+    fontSize: 14,
+    textAlign: "justify",
+    color: "#000000",
+    lineHeight: 22,
+    fontWeight: 400,
+  },
+
+  image: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  button1: {
+    backgroundColor: "#FF5B13",
+    color: "white",
+    paddingHorizontal: 60,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+
+  button2: {
+    backgroundColor: "#FF3530",
+    color: "white",
+    paddingHorizontal: 60,
+    paddingVertical: 15,
+    borderRadius: 10,
+  },
+
+  bngksbtn: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 15,
+  },
+
+  text1: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+  },
+
+  text2: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+  },
+});

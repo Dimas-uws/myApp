@@ -21,8 +21,10 @@ type Note = {
 };
 
 const NoteItem = ({ item }: { item: Note }) => {
+  const router = useRouter()
+
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={() => router.push(`/detail/${item.id}`)}>
       <Image source={item.image} style={{ width: 75, height: 75 }} />
 
       <View style={styles.cardContainer}>

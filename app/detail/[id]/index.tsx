@@ -1,4 +1,6 @@
+import { notes } from "@/data/notesData";
 import { Ionicons } from "@expo/vector-icons";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import {
   Image,
   ScrollView,
@@ -10,34 +12,31 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DetailScreen() {
+  const router = useRouter()
+  const {id} =useLocalSearchParams()
+
+  const note = notes.find((note) => note.id === Number (id) )
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.appBar}>
-        <Ionicons name="arrow-back" size={26} color={"#FF5B13"} />
+        <TouchableOpacity onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={26} color={"#FF5B13"} />
+        </TouchableOpacity>
         <Text style={styles.appBarTitle}>Note Details</Text>
       </View>
       <ScrollView>
         <View style={styles.image}>
           <Image
-          source={require("@/assets/images/content1.png")}
-          style={{ width: 250, height: 250 }}
-        />
+            source={note?.image}
+            style={{ width: 250, height: 250 }}
+          />
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>Belajar progaming</Text>
-          <Text style={styles.date}>Selasa 13 Mei 2025</Text>
-          <Text style={styles.desc}>
-            Mulailah dengan memahami dasar JavaScript seperti fungsi, array, dan
-            async/await. Pelajari konsep component di React dan gunakan
-            functional component serta hooks seperti useState dan useEffect.
-          </Text>
-          <Text style={styles.desc}>
-            Bangun proyek kecil seperti to-do list untuk latihan. Gunakan
-            dokumentasi resmi React dan manfaatkan React Developer Tools untuk
-            debugging. Terakhir, bergabunglah dengan komunitas agar semangat
-            belajar tetap terjaga.
-          </Text>
+          <Text style={styles.title}> {note?.title} </Text>
+          <Text style={styles.date}> {note?.date} </Text>
+          <Text style={styles.description}> {note?.description} </Text>
         </View>
       </ScrollView>
 
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
 
-  desc: {
+  description: {
     paddingVertical: 10,
     fontSize: 14,
     textAlign: "justify",
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
 
   image: {
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
 
   button1: {

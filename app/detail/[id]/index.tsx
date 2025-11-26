@@ -41,7 +41,7 @@ export default function DetailScreen() {
       </ScrollView>
 
       <View style={styles.bngksbtn}>
-        <TouchableOpacity style={styles.button1}>
+        <TouchableOpacity style={styles.button1} onPress={() => router.push(`/update/${note?.id}`)}>
           <Text style={styles.text1}>Update</Text>
         </TouchableOpacity>
 
